@@ -93,7 +93,7 @@ html {
   
   .content-container {
     display: grid;
-    grid-template-rows: 10% 1fr 1fr 10%;
+    grid-template-rows: 10% 1fr 1fr 1fr;
     grid-template-columns: 1fr;
     justify-content: center;
     border: #fff solid .5px;
@@ -124,10 +124,10 @@ html {
   #space-battle {
     text-align: center;
     font-size: 24px;
-    /* display: flex;
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center; */
+    justify-content: center;
   }
   
   #game-status {
