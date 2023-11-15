@@ -150,22 +150,22 @@ const textStyle = [
   // event listener for action button
   
   
-  const scoreboard = document.getElementById("scoreboard")
+ 
   
   
   // Paul task 
   // Reset button
-  document.getElementById('reset-button').addEventListener('click', () => {
-    // We'll empty the alienShips array so that the start button can trigger the instantiation of eight ships with semi-random stats
-    alienShips = []
+//   document.getElementById('reset-button').addEventListener('click', () => {
+//     // We'll empty the alienShips array so that the start button can trigger the instantiation of eight ships with semi-random stats
+//     alienShips = []
   
-    document.getElementById('space-battle').innerHTML = 'Player 1 Ready?'
+//     document.getElementById('space-battle').innerHTML = 'Player 1 Ready?'
   
-    document.getElementById('scoreboard').innerHTML = ''
+//     document.getElementById('scoreboard').innerHTML = ''
   
-    document.getElementById('game-status').innerHTML = ''
+//     document.getElementById('game-status').innerHTML = ''
   
-    USSAssembly.hull = 20
+//     USSAssembly.hull = 20
   
     // I'll update this as we go... we'll need to reset the images if they change, the scoreboard, etc.
   
