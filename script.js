@@ -15,6 +15,8 @@ const textStyle = [
     console.clear();
   }, 9000);
 
+
+  // Assign variable names to buttons
   const startBtn = document.getElementById('start-button')
   const attackBtn = document.getElementById('attack-button')
   const fleeBtn = document.getElementById('flee-button')
@@ -22,14 +24,21 @@ const textStyle = [
   const resetBtn = document.getElementById('reset-button')
   const battleEl = document.getElementById('space-battle')
 
+  // Assign variable name to keep track of how many alien ships have been defeated
   let battlesWon = 0
+
+  // Assign variable names to scoreboard and game status area
   const scoreBoard = document.getElementById('scoreboard')
   const gameStatus = document.getElementById('game-status')
+
+  // Assign variable name to an empty array that will hold game status messages
   let messageArr = []
 
+  // Assign variable names to the image area and an array of alien ship images to be randomly selected from
   const alienShipsImg = ["https://i.imgur.com/eD4HlrL.png", "https://i.imgur.com/7WpzZBJ.png","https://i.imgur.com/9dy4wKo.png","https://i.imgur.com/TFfFnqa.png","https://i.imgur.com/04PFqQd.png","https://i.imgur.com/N3YvDJE.png"]
   const alienImg = document.getElementById('alien')
   
+  // Base class for ship
   class Ship {
     constructor
       (name, hull, firepower, accuracy) {
@@ -38,6 +47,7 @@ const textStyle = [
         this.firepower = firepower
         this.accuracy = accuracy
     }
+    // Attack method that pushes a particular message into messageArr based on whether the attack hits or misses
     attack(target) {
         if (Math.random() <= this.accuracy) {
             target.hull -= this.firepower
@@ -46,31 +56,38 @@ const textStyle = [
     }
   }
   
+  // Subclass for the player ship
   class PlayerShip extends Ship {
     constructor() {
       super('USS Assembly', 20, 5, 0.7);
     }
   }
 
+
+  // Subclass for the alien ships
   class AlienShip extends Ship {
     constructor(name, hull, firepower, accuracy) {
        super(name, hull, firepower, accuracy)
     }
   }
 
+  // Function to use for purposes of randomization
   function randomization(max, min) {
     let randomNum = Math.floor(Math.random() * (max - min + 1)) + min
     return randomNum
   }
-  
+
+  // Instantiate player ship and a unique alien ship with assigned values
   const USSAssembly = new PlayerShip()
 
   const distortedET = new AlienShip('Distorted ET', 15, 4, 0.7)
 
+  // Array to hold all alien ships for a given round
   let alienShips = [
     distortedET
   ]
 
+  // Function to generate alien ships and push them into alienShips array
   function generateShips(num) {
     for (let i = 1; i <= num; i++) {
         const alienShip = new AlienShip(`Alien Ship ${i}`, randomization(6, 3), randomization(4, 2), (randomization(8, 6)) / 10)
@@ -79,6 +96,7 @@ const textStyle = [
     return alienShips
   }
 
+  // Render function to display the messages stored in messageArr as an unordered list in the game status area
   gameStatus.render = () => {
     gameStatus.innerHTML = `<ul> ${
       messageArr.map((item => {
@@ -88,12 +106,15 @@ const textStyle = [
       })).join('')
     }</ul>`
   }
-  
+
+  // Event listener for start button, which empties alienShips array and randomly generates six alien ships
   startBtn.addEventListener('click', () => {
     alienShips = [];
     generateShips(6);
+    // Start button disappears and the attack button appears upon click
     startBtn.style.display = 'none';
     attackBtn.style.display = 'block';
+    // Resets player ship health, the battle element message, game status area, battles won, etc.
     USSAssembly.hull = 20;
     battleEl.textContent = '';
     battleEl.textContent = `I've got a GREAT feeling about this... USS Assembly hull integrity is at ${USSAssembly.hull}`;
@@ -103,13 +124,19 @@ const textStyle = [
     scoreBoard.textContent = `Alien ships defeated: ${battlesWon}`
   })
 
+  // Event listener for attack button
   attackBtn.addEventListener('click', () => {
+
+    // Resets messageArr between each round of attacks
     messageArr = [];
+
+    // Attacks the first ship in the alienShips array, and alien ship fires back if it survives
     USSAssembly.attack(alienShips[0])
     if (alienShips[0].hull > 0) {
       alienShips[0].attack(USSAssembly)
     } 
   
+    // If the alien ship loses all its health, messages update to reflect battles won, current hull integrity, etc., and displays flee and continue buttons
     if (alienShips[0].hull <= 0) {
       battlesWon = battlesWon + 1
       scoreBoard.textContent = `Alien ships defeated: ${battlesWon}`
@@ -118,25 +145,31 @@ const textStyle = [
       fleeBtn.style.display = 'block';
       battleEl.textContent = '';
       battleEl.textContent = `USS Assembly hull integrity is at ${USSAssembly.hull}`;
+      // When one alien ship dies, another random image is picked from the alienShipsImg array to replace existing alien ship image
       alienImg.src = alienShipsImg[randomization(alienShipsImg.length - 1, 0)]
     }
 
+    // If player ship dies, display taunting message and and display reset button
     if (USSAssembly.hull <= 0) {
       resetBtn.style.display = 'block';
       attackBtn.style.display = 'none';
       battleEl.textContent = `YOU HAD ONE JOB!!!`
     }
-
+    // runs the render function to update gameStatus messages after each round of attacks
     gameStatus.render() 
 
   
   })
 
+  // Event listener for continue button
   continueBtn.addEventListener('click', () => {
+    // Remove first alien ship, which has been destroyed
     alienShips.shift()
     attackBtn.style.display = 'block';
     continueBtn.style.display = 'none';
     fleeBtn.style.display = 'none';
+
+    // If alienShips array is empty, a victory message is displayed and the player is asked to start again
     if (alienShips.length === 0) {
       battleEl.textContent = `Go home soldier you've won the battle. Will you seek further Glory or will you rest on your Laurels?`
       startBtn.style.display = 'block';
@@ -144,14 +177,18 @@ const textStyle = [
     }
   })
 
+  // Event listener for flee button
   fleeBtn.addEventListener('click',() => {
+    // Displays taunting message and allows player to start again
     battleEl.textContent = `Whats the difference between you and a COWARD?`
     continueBtn.style.display = 'none';
     fleeBtn.style.display = 'none';
     startBtn.style.display = 'block';
   })
 
+  // Event listener for reset button
   resetBtn.addEventListener('click',() => {
+    // Sends the player back to the opening screen, with initial battle message, blank scoreboard and game status, etc.
     resetBtn.style.display = 'none';
     startBtn.style.display = 'block';
     gameStatus.innerHTML = '';
