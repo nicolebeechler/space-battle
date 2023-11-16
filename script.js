@@ -33,7 +33,12 @@ const textStyle = [
   let battlesWon = 0
   const scoreBoard = document.getElementById('scoreboard')
   const gameStatus = document.getElementById('game-status')
-  const messageArr = []
+  let messageArr = []
+
+  const alienShipsImg = ["https://i.imgur.com/eD4HlrL.png", "https://i.imgur.com/7WpzZBJ.png","https://i.imgur.com/9dy4wKo.png","https://i.imgur.com/TFfFnqa.png","https://i.imgur.com/04PFqQd.png","https://i.imgur.com/N3YvDJE.png"
+]
+
+  const alienImg = document.getElementById('alien')
   
   class Ship {
     constructor
@@ -46,7 +51,7 @@ const textStyle = [
     attack(target) {
         if (Math.random() <= this.accuracy) {
             target.hull -= this.firepower
-            messageArr.push(`${target} just took ${this.firepower} worth of damage. Yikes!`)
+            messageArr.push(`${target.name} just took ${this.firepower} worth of damage. Yikes!`)
         } else {messageArr.push(`Hey ${this.name}, you gotta be quicker than that! Shot missed.`)}
     }
   }
@@ -91,7 +96,7 @@ const textStyle = [
 
   const distortedET = new AlienShip('Distorted ET', 15, 4, 0.7)
 
-  const alienShips = [
+  let alienShips = [
     distortedET
   ]
 
@@ -103,39 +108,92 @@ const textStyle = [
     return alienShips
   }
 
+  gameStatus.render = () => {
+    gameStatus.innerHTML = `<ul> ${
+      messageArr.map((item => {
+        return `<li>
+         ${item} 
+         </li>`
+      })).join('')
+    }</ul>`
+  }
   
-
   startBtn.addEventListener('click', () => {
+    alienShips = [];
     generateShips(6);
     startBtn.style.display = 'none';
     attackBtn.style.display = 'block';
+    USSAssembly.hull = 20;
+    battleEl.textContent = '';
     battleEl.textContent = `I've got a GREAT feeling about this... USS Assembly hull integrity is at ${USSAssembly.hull}`;
-    
+    gameStatus.innerHTML = '';
+    messageArr = [];
+    battlesWon = 0;
+    scoreBoard.textContent = `Alien ships defeated: ${battlesWon}`
   })
 
   attackBtn.addEventListener('click', () => {
-    
+    messageArr = [];
   
 
-    while ((alienShips[0].hull > 0) && (USSAssembly.hull > 0)) {
+    
         USSAssembly.attack(alienShips[0])
         if (alienShips[0].hull > 0) {
         alienShips[0].attack(USSAssembly)
         } 
-    }
+    
 
     if (alienShips[0].hull <= 0) {
         battlesWon = battlesWon + 1
         scoreBoard.textContent = `Alien ships defeated: ${battlesWon}`
-        // We'll come back to this
-        gameStatus.textcontent = messageArr.map(obj => obj.message).join('\n')
+        attackBtn.style.display = 'none';
+        continueBtn.style.display = 'block';
+        fleeBtn.style.display = 'block';
+        battleEl.textContent = '';
+        battleEl.textContent = `USS Assembly hull integrity is at ${USSAssembly.hull}`;
+        alienImg.src = alienShipsImg[randomization(alienShipsImg.length - 1, 0)]
     }
 
-    if (USSAssembly.hul <= 0) {
-        // hold on!
+    if (USSAssembly.hull <= 0) {
+      resetBtn.style.display = 'block';
+      attackBtn.style.display = 'none';
+      battleEl.textContent = `YOU HAD ONE JOB!!!`
     }
+
+    gameStatus.render() 
+
   
   })
+
+  continueBtn.addEventListener('click', () => {
+    alienShips.shift()
+    attackBtn.style.display = 'block';
+    continueBtn.style.display = 'none';
+    fleeBtn.style.display = 'none';
+    if (alienShips.length === 0) {
+      battleEl.textContent = `Go home soldier you've won the battle. Will you seek further Glory or will you rest on your Laurels?`
+      startBtn.style.display = 'block';
+      attackBtn.style.display = 'none';
+    }
+  })
+
+  fleeBtn.addEventListener('click',() => {
+    battleEl.textContent = `Whats the difference between you and a COWARD?`
+    continueBtn.style.display = 'none';
+    fleeBtn.style.display = 'none';
+    startBtn.style.display = 'block';
+  })
+
+  resetBtn.addEventListener('click',() => {
+    resetBtn.style.display = 'none';
+    startBtn.style.display = 'block';
+    gameStatus.innerHTML = '';
+    battleEl.innerHTML = `Player 1 Ready?`
+    messageArr = [];
+    scoreBoard.innerHTML = '';
+  })
+
+  
 
   // Note from Paul: below is an event listener that should trigger a function to generate alien ships.  I think we can wait to do this part! Something like below:
   
