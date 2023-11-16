@@ -85,7 +85,7 @@ html {
   }
   
   h1 {
-    font-size: 4.6rem;
+    font-size: 7rem;
     color: #fff;
     text-shadow: 0px -1px 4px white, 0px -2px 10px yellow, 0px -10px 20px #ff8000, 0px -18px 40px red;
     text-align: center;
@@ -108,6 +108,10 @@ html {
     margin-right: auto;
     font-family: 'Michroma', sans-serif;
   }
+
+  #scoreboard {
+    font-size: 1.5rem;
+  }
   
   #ships {
     /* text-align: center; */
@@ -124,7 +128,7 @@ html {
   
   #space-battle {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -132,6 +136,7 @@ html {
   }
   
   #game-status {
+    font-size: 1.5rem;
     text-align: center;
     color: red;
   }
@@ -154,7 +159,7 @@ html {
     transition: 0.5s;
     text-decoration: none;
     display: inline-block;
-    font-size: 1rem;
+    font-size: 2rem;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
@@ -180,14 +185,55 @@ html {
     bottom: 0;
     z-index: 1; */
     font-family: 'Michroma', sans-serif;
+    font-size: 1.5rem;
   }
   
   #group-name {
     filter: drop-shadow(0 0 10px white);
   }
 
-  @media screen and (min-width: 480px) {
-    body {
-       background-color: lightgreen;
+  @media screen and (max-width: 40rem) and (min-width: 30rem), (max-height: 40rem) and (min-height: 30rem) {
+     h1 {
+      font-size: 5rem;
+     }
+     #space-battle {
+      font-size: 1.75rem;
+     }
+     #scoreboard {
+      font-size: 1.5rem;
+     }
+     #game-status {
+      font-size: 1.5rem;
+     }
+
+     .button {
+      font-size: 1.5rem;
+     }
+     .footer-container {
+      font-size: 1.5rem;
      }
    }
+
+   @media screen and (max-height: 29.99rem) {
+    h1 {
+      font-size: 2rem;
+    }
+     #space-battle {
+      font-size: 1rem;
+     }
+     #scoreboard {
+      font-size: 1rem;
+     }
+     #game-status {
+      font-size: 1rem;
+     }
+
+     .button {
+      font-size: 1.25rem;
+     }
+     .footer-container {
+      font-size: 1rem;
+     }
+   }
+
+   

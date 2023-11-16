@@ -14,14 +14,6 @@ const textStyle = [
   setTimeout(function() {
     console.clear();
   }, 9000);
-  
-  // Base Class would be like ship or something
-  // constructor parameters: hull, firepower, accuracy, ....
-  // base class methods: attack that inflicts damage
-  // add sound effect?
-  
-  // Omar's task
-  // Note from Paul: there's more to defining a class here.  We need to set the values of the constructor parameters, like this.hull = hull.  We also need to fill in the attack method.
 
   const startBtn = document.getElementById('start-button')
   const attackBtn = document.getElementById('attack-button')
@@ -35,9 +27,7 @@ const textStyle = [
   const gameStatus = document.getElementById('game-status')
   let messageArr = []
 
-  const alienShipsImg = ["https://i.imgur.com/eD4HlrL.png", "https://i.imgur.com/7WpzZBJ.png","https://i.imgur.com/9dy4wKo.png","https://i.imgur.com/TFfFnqa.png","https://i.imgur.com/04PFqQd.png","https://i.imgur.com/N3YvDJE.png"
-]
-
+  const alienShipsImg = ["https://i.imgur.com/eD4HlrL.png", "https://i.imgur.com/7WpzZBJ.png","https://i.imgur.com/9dy4wKo.png","https://i.imgur.com/TFfFnqa.png","https://i.imgur.com/04PFqQd.png","https://i.imgur.com/N3YvDJE.png"]
   const alienImg = document.getElementById('alien')
   
   class Ship {
@@ -56,29 +46,12 @@ const textStyle = [
     }
   }
   
-  //Lilianne task 
-  //create class USS Assembly
   class PlayerShip extends Ship {
     constructor() {
-      //default properties
       super('USS Assembly', 20, 5, 0.7);
     }
   }
 
-//   attack(target) {
-
-//   }
-//   super.attack(target); // Call the attack method of the parent class
-//   // This would be specific to PlayerShip's attack
-//   if (target.hull <= 0) {
-//     let victoryStatus = `Congratulations! ${this.name} defeated ${target.name}!`;
-//     attackStatus.push(victoryStatus);
-//   }
-  
-  //Diana's task
-  // subclass for alien ships
-  // Note from Paul: I think we'll need to have stats be randomly generated using Math.floor(Math.random)... for instance, hull needs to be randomly selected between 3-6
-  //Note from Diana: Right, and I took a peak at the answer, I'm not there yet.
   class AlienShip extends Ship {
     constructor(name, hull, firepower, accuracy) {
        super(name, hull, firepower, accuracy)
@@ -90,8 +63,6 @@ const textStyle = [
     return randomNum
   }
   
-  // create instances of classes
-  // Note from Paul: we'll need to fill in the parameters for the player ship.  We'll also need to instantiate a number of alien ships so that they can be put into the array below.
   const USSAssembly = new PlayerShip()
 
   const distortedET = new AlienShip('Distorted ET', 15, 4, 0.7)
@@ -134,24 +105,20 @@ const textStyle = [
 
   attackBtn.addEventListener('click', () => {
     messageArr = [];
+    USSAssembly.attack(alienShips[0])
+    if (alienShips[0].hull > 0) {
+      alienShips[0].attack(USSAssembly)
+    } 
   
-
-    
-        USSAssembly.attack(alienShips[0])
-        if (alienShips[0].hull > 0) {
-        alienShips[0].attack(USSAssembly)
-        } 
-    
-
     if (alienShips[0].hull <= 0) {
-        battlesWon = battlesWon + 1
-        scoreBoard.textContent = `Alien ships defeated: ${battlesWon}`
-        attackBtn.style.display = 'none';
-        continueBtn.style.display = 'block';
-        fleeBtn.style.display = 'block';
-        battleEl.textContent = '';
-        battleEl.textContent = `USS Assembly hull integrity is at ${USSAssembly.hull}`;
-        alienImg.src = alienShipsImg[randomization(alienShipsImg.length - 1, 0)]
+      battlesWon = battlesWon + 1
+      scoreBoard.textContent = `Alien ships defeated: ${battlesWon}`
+      attackBtn.style.display = 'none';
+      continueBtn.style.display = 'block';
+      fleeBtn.style.display = 'block';
+      battleEl.textContent = '';
+      battleEl.textContent = `USS Assembly hull integrity is at ${USSAssembly.hull}`;
+      alienImg.src = alienShipsImg[randomization(alienShipsImg.length - 1, 0)]
     }
 
     if (USSAssembly.hull <= 0) {
@@ -193,40 +160,3 @@ const textStyle = [
     scoreBoard.innerHTML = '';
   })
 
-  
-
-  // Note from Paul: below is an event listener that should trigger a function to generate alien ships.  I think we can wait to do this part! Something like below:
-  
-  // Rachail's task 
-  // array for alien ships
-  // Note from Paul: we need to store the full objects in the array.  We'll need to instantiate eight ships with semi-random stats and push them into the array with a loop
- 
-  
-  // Junfeng's task 
-  // alien ships need to automatically react to USS Assembly actions
-  // some function that sets this in motion ^^^
-  // event listener for action button
-  
-  
- 
-  
-  
-  // Paul task 
-  // Reset button
-//   document.getElementById('reset-button').addEventListener('click', () => {
-//     // We'll empty the alienShips array so that the start button can trigger the instantiation of eight ships with semi-random stats
-//     alienShips = []
-  
-//     document.getElementById('space-battle').innerHTML = 'Player 1 Ready?'
-  
-//     document.getElementById('scoreboard').innerHTML = ''
-  
-//     document.getElementById('game-status').innerHTML = ''
-  
-//     USSAssembly.hull = 20
-  
-    // I'll update this as we go... we'll need to reset the images if they change, the scoreboard, etc.
-  
-//   })
-  
-  
