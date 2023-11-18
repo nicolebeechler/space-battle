@@ -5,10 +5,10 @@ Reach for glory by killing alien ships
 
 ### Fantastic Eight
 
-1. Nicole Beechler https://github.com/nicolebeechler/
-1. Paul Shephard https://github.com/pshephardiii
-1. Junfeng Qiao https://github.com/EmmaQjf
-1. Sayed Kabir https://github.com/sayed1602/
+1. [Nicole Beechler] (https://github.com/nicolebeechler/)
+1. [Paul Shephard] (https://github.com/pshephardiii/)
+1. [Junfeng Qiao] (https://github.com/EmmaQjf/)
+1. [Sayed Kabir] (https://github.com/sayed1602/)
 1. Lillianne Kho 
 1. Omar Ibraheem 
 1. Rachail Pomerlee
@@ -34,9 +34,9 @@ Here's how the cosmic dance unfolds:
 
 Every ship in this intergalactic conflict, including your USS Assembly, comes equipped with:
 
-* Hull: Think of it as your shield level. Zero means game over.
-* Firepower: This is the punch your lasers pack.
-* Accuracy: Your odds of hitting the mark.
+* **Hull**: Think of it as your shield level. Zero means game over.
+* **Firepower**: This is the punch your lasers pack.
+* **Accuracy**: Your odds of hitting the mark.
 * Your trusty USS Assembly boasts a hull integrity of 20, a firepower rating of 5, and targeting accuracy of .7.
 
 But beware, each alien adversary comes with variable stats ranging in hull strength (3-6), firepower (2-4), and targeting systems (.6-.8).
