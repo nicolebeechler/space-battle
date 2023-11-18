@@ -144,13 +144,13 @@ const textStyle = [
 
   // Render function to display the messages stored in messageArr as an unordered list in the game status area
   gameStatus.render = () => {
-    gameStatus.innerHTML = `<ul> ${
+    gameStatus.innerHTML = `${
       messageArr.map((item => {
-        return `<li>
+        return `<p>
          ${item} 
-         </li>`
+         </p>`
       })).join('')
-    }</ul>`
+    }`
   }
 
   // Event listeners for difficulty buttons that generates new alien ships for the round
@@ -211,7 +211,8 @@ const textStyle = [
     } 
     
     // Update player ship and alien ship hull integrity after each attack
-    battleEl.textContent = `USS Assembly hull integrity is at ${USSAssembly.hull}, Alien Ship hull integrity at ${alienShips[0].hull}`
+    battleEl.innerHTML = `<ul><li>USS Assembly hull is at ${USSAssembly.hull},</li>
+    <li>Alien Ship hull at ${alienShips[0].hull}</li></ul>`
 
     // If the alien ship loses all its health, messages update to reflect battles won, current hull integrity, etc., and displays flee and continue buttons
     if (alienShips[0].hull <= 0) {
@@ -225,7 +226,7 @@ const textStyle = [
       // Change alien image to an explosion
       alienImg.src = "https://i.imgur.com/ivuwvOw.png"
       explosionSound.play()
-      explosionSound.volume = .3
+      explosionSound.volume = .1
       // Add animation class to alien image to make it look like it's exploding
       alienImg.classList.add("scaleImage")
     }
@@ -238,7 +239,7 @@ const textStyle = [
       // Change player ship image to an explosion and add animation class
       USS.src="https://i.imgur.com/ivuwvOw.png"
       explosionSound.play()
-      explosionSound.volume = .3
+      explosionSound.volume = .1
       USS.classList.add("scaleImage")
     }
     // runs the render function to update gameStatus messages after each round of attacks
