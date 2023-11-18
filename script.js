@@ -15,7 +15,6 @@ const textStyle = [
     console.clear();
   }, 9000);
 
-
   // Assign variable names to buttons
   const startBtn = document.getElementById('start-button')
   const attackBtn = document.getElementById('attack-button')
@@ -63,7 +62,6 @@ const textStyle = [
     }
   }
 
-
   // Subclass for the alien ships
   class AlienShip extends Ship {
     constructor(name, hull, firepower, accuracy) {
@@ -88,6 +86,8 @@ const textStyle = [
   ]
 
   // Function to generate alien ships and push them into alienShips array
+  // PAUL NOTE: we could create an easy, normal, and hard version of this function and assign it to a specific button. 
+  // Just have the start button come up after you pick the difficulty
   function generateShips(num) {
     for (let i = 1; i <= num; i++) {
         const alienShip = new AlienShip(`Alien Ship ${i}`, randomization(6, 3), randomization(4, 2), (randomization(8, 6)) / 10)
@@ -167,7 +167,7 @@ const textStyle = [
   // Event listener for continue button
   continueBtn.addEventListener('click', () => {
     // Remove animation class from alien image
-    alienImg.classList.remove("scaleImage");
+    alienImg.classList.remove("scaleImage")
     // Remove first alien ship, which has been destroyed
     alienShips.shift()
     // Select a random image from alienShipsImg array for player ship to fight
@@ -202,5 +202,8 @@ const textStyle = [
     battleEl.innerHTML = `Player 1 Ready?`
     messageArr = [];
     scoreBoard.innerHTML = '';
+    // Reset player ship image
+    USS.classList.remove("scaleImage")
+    USS.src="https://i.imgur.com/Q5QUnKG.png"
   })
 
