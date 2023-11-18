@@ -1,14 +1,16 @@
 # space-battle
 
+<a href="https://imgur.com/kpnvgoV"><img src="https://i.imgur.com/kpnvgoV.png" title="Space Battle" /></a>
+
 ## Xtreme Space Battle 	
 Reach for glory by killing alien ships	
 
 ### Fantastic Eight
 
-1. [Nicole Beechler] (https://github.com/nicolebeechler/)
-1. [Paul Shephard] (https://github.com/pshephardiii/)
-1. [Junfeng Qiao] (https://github.com/EmmaQjf/)
-1. [Sayed Kabir] (https://github.com/sayed1602/)
+1. [Nicole Beechler](https://github.com/nicolebeechler/)
+1. [Paul Shephard](https://github.com/pshephardiii/)
+1. [Junfeng Qiao](https://github.com/EmmaQjf/)
+1. [Sayed Kabir](https://github.com/sayed1602/)
 1. Lillianne Kho 
 1. Omar Ibraheem 
 1. Rachail Pomerlee
