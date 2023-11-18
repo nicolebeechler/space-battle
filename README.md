@@ -30,7 +30,7 @@ Here's how the cosmic dance unfolds:
 * Should you obliterate the ship, you face a choice: engage the next enemy or warp away to safety.
 * Claim victory by reducing all alien ships to space dust or face defeat if the USS Assembly falls.
 
-## Crafting Your Starship
+## 🛸 Crafting Your Starship
 
 Every ship in this intergalactic conflict, including your USS Assembly, comes equipped with:
 
