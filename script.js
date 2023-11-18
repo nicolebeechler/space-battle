@@ -144,9 +144,11 @@ const textStyle = [
       continueBtn.style.display = 'block';
       fleeBtn.style.display = 'block';
       battleEl.textContent = '';
-      battleEl.textContent = `USS Assembly hull integrity is at ${USSAssembly.hull}`;
-      // When one alien ship dies, another random image is picked from the alienShipsImg array to replace existing alien ship image
-      alienImg.src = alienShipsImg[randomization(alienShipsImg.length - 1, 0)]
+      battleEl.textContent = `USS Assembly hull integrity is at ${USSAssembly.hull}`
+      // Change alien image to an explosion
+      alienImg.src = "https://i.imgur.com/ivuwvOw.png";
+      // Add animation class to alien image to make it look like it's exploding
+      alien.classList.add("scaleImage");
     }
 
     // If player ship dies, display taunting message and and display reset button
@@ -154,17 +156,22 @@ const textStyle = [
       resetBtn.style.display = 'block';
       attackBtn.style.display = 'none';
       battleEl.textContent = `YOU HAD ONE JOB!!!`
+      // Change player ship image to an explosion and add animation class
+      USS.src="https://i.imgur.com/ivuwvOw.png"
+      USS.classList.add("scaleImage")
     }
     // runs the render function to update gameStatus messages after each round of attacks
     gameStatus.render() 
-
-  
   })
 
   // Event listener for continue button
   continueBtn.addEventListener('click', () => {
+    // Remove animation class from alien image
+    alienImg.classList.remove("scaleImage");
     // Remove first alien ship, which has been destroyed
     alienShips.shift()
+    // Select a random image from alienShipsImg array for player ship to fight
+    alienImg.src = alienShipsImg[randomization(alienShipsImg.length - 1, 0)]
     attackBtn.style.display = 'block';
     continueBtn.style.display = 'none';
     fleeBtn.style.display = 'none';

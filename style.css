@@ -1,4 +1,18 @@
-/* Nicole's task */
+@keyframes scaling-image-animation {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  80% {
+    transform: scale(2);
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 html {
     height: 100%;
@@ -235,5 +249,9 @@ html {
       font-size: 1rem;
      }
    }
+
+   .scaleImage {
+    animation: scaling-image-animation 4s ease;
+  }
 
    
