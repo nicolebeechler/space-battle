@@ -21,6 +21,9 @@ const textStyle = [
   const fleeBtn = document.getElementById('flee-button')
   const continueBtn = document.getElementById('continue-button')
   const resetBtn = document.getElementById('reset-button')
+  const easyBtn = document.getElementById('easy-button')
+  const normalBtn = document.getElementById('normal-button')
+  const hardBtn = document.getElementById('hard-button')
   const battleEl = document.getElementById('space-battle')
 
   // Assign variable name to keep track of how many alien ships have been defeated
@@ -88,9 +91,25 @@ const textStyle = [
   // Function to generate alien ships and push them into alienShips array
   // PAUL NOTE: we could create an easy, normal, and hard version of this function and assign it to a specific button. 
   // Just have the start button come up after you pick the difficulty
-  function generateShips(num) {
+  function generateShipsEasy(num) {
     for (let i = 1; i <= num; i++) {
         const alienShip = new AlienShip(`Alien Ship ${i}`, randomization(6, 3), randomization(4, 2), (randomization(8, 6)) / 10)
+        alienShips.push(alienShip)
+    }
+    return alienShips
+  }
+
+  function generateShipsNormal(num) {
+    for (let i = 1; i <= num; i++) {
+        const alienShip = new AlienShip(`Alien Ship ${i}`, randomization(7, 6), randomization(4, 2), (randomization(8, 6)) / 10)
+        alienShips.push(alienShip)
+    }
+    return alienShips
+  }
+
+  function generateShipsHard(num) {
+    for (let i = 1; i <= num; i++) {
+        const alienShip = new AlienShip(`Alien Ship ${i}`, randomization(7, 6), randomization(6, 4), (randomization(8, 6)) / 10)
         alienShips.push(alienShip)
     }
     return alienShips
@@ -109,8 +128,6 @@ const textStyle = [
 
   // Event listener for start button, which empties alienShips array and randomly generates six alien ships
   startBtn.addEventListener('click', () => {
-    alienShips = [];
-    generateShips(6);
     // Start button disappears and the attack button appears upon click
     startBtn.style.display = 'none';
     attackBtn.style.display = 'block';
@@ -122,6 +139,33 @@ const textStyle = [
     messageArr = [];
     battlesWon = 0;
     scoreBoard.textContent = `Alien ships defeated: ${battlesWon}`
+  })
+
+  easyBtn.addEventListener('click', ()=>{
+    startBtn.style.display = 'block'
+    easyBtn.style.display = 'none'
+    normalBtn.style.display = 'none'
+    hardBtn.style.display = 'none'
+    alienShips = []
+    generateShipsEasy(6)
+  })
+
+  normalBtn.addEventListener('click', ()=>{
+    startBtn.style.display = 'block'
+    easyBtn.style.display = 'none'
+    normalBtn.style.display = 'none'
+    hardBtn.style.display = 'none'
+    alienShips = []
+    generateShipsNormal(6)
+  })
+
+  hardBtn.addEventListener('click', ()=>{
+    startBtn.style.display = 'block'
+    easyBtn.style.display = 'none'
+    normalBtn.style.display = 'none'
+    hardBtn.style.display = 'none'
+    alienShips = []
+    generateShipsHard(6)
   })
 
   // Event listener for attack button
@@ -179,8 +223,11 @@ const textStyle = [
     // If alienShips array is empty, a victory message is displayed and the player is asked to start again
     if (alienShips.length === 0) {
       battleEl.textContent = `Go home soldier you've won the battle. Will you seek further Glory or will you rest on your Laurels?`
-      startBtn.style.display = 'block';
-      attackBtn.style.display = 'none';
+      easyBtn.style.display = 'block'
+      normalBtn.style.display = 'block'
+      hardBtn.style.display = 'block'
+      startBtn.style.display= 'none'
+      attackBtn.style.display = 'none'
     }
   })
 
@@ -190,20 +237,24 @@ const textStyle = [
     battleEl.textContent = `Whats the difference between you and a COWARD?`
     continueBtn.style.display = 'none';
     fleeBtn.style.display = 'none';
-    startBtn.style.display = 'block';
+    easyBtn.style.display = 'block'
+    normalBtn.style.display = 'block'
+    hardBtn.style.display = 'block'
   })
 
   // Event listener for reset button
   resetBtn.addEventListener('click',() => {
     // Sends the player back to the opening screen, with initial battle message, blank scoreboard and game status, etc.
     resetBtn.style.display = 'none';
-    startBtn.style.display = 'block';
+    easyBtn.style.display = 'block'
+    normalBtn.style.display = 'block'
+    hardBtn.style.display = 'block'
     gameStatus.innerHTML = '';
     battleEl.innerHTML = `Player 1 Ready?`
     messageArr = [];
     scoreBoard.innerHTML = '';
     // Reset player ship image
-    USS.classList.remove("scaleImage")
     USS.src="https://i.imgur.com/Q5QUnKG.png"
+    USS.classList.remove("scaleImage")
   })
 

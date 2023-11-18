@@ -188,7 +188,8 @@ html {
   #attack-button,
   #continue-button,
   #reset-button,
-  #flee-button {
+  #flee-button,
+  #start-button {
     display: none;
   }
   
