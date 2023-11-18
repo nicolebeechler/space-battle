@@ -14,6 +14,16 @@
   }
 }
 
+@keyframes animStar {
+  from {
+    transform: translateY(-2000px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
 html {
     height: 100%;
     width: 100%;
@@ -28,7 +38,6 @@ html {
   #gradient {
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   }
-  
   
   #stars {
     width: 1px;
@@ -82,16 +91,6 @@ html {
     height: 3px;
     background: transparent;
     box-shadow: 1729px 1179px #FFF, 736px 324px #FFF, 1185px 76px #FFF, 1754px 227px #FFF, 761px 1424px #FFF, 803px 646px #FFF, 44px 201px #FFF, 1606px 320px #FFF, 1395px 1443px #FFF, 253px 1px #FFF, 1340px 1711px #FFF, 83px 704px #FFF, 1089px 863px #FFF, 1636px 1641px #FFF, 776px 356px #FFF, 526px 1353px #FFF, 1689px 1398px #FFF, 818px 1937px #FFF, 209px 686px #FFF, 1799px 1467px #FFF, 672px 948px #FFF, 663px 782px #FFF, 1931px 407px #FFF, 713px 1318px #FFF, 1804px 227px #FFF, 16px 1667px #FFF, 1630px 290px #FFF, 288px 1727px #FFF, 1769px 948px #FFF, 1683px 216px #FFF, 652px 1767px #FFF, 864px 1708px #FFF, 895px 320px #FFF, 427px 30px #FFF, 1724px 1184px #FFF, 1774px 1618px #FFF, 452px 140px #FFF, 1328px 904px #FFF, 313px 1774px #FFF, 863px 1295px #FFF, 1686px 164px #FFF, 180px 505px #FFF, 1872px 974px #FFF, 1347px 672px #FFF, 1726px 1664px #FFF, 748px 869px #FFF, 67px 520px #FFF, 1065px 1056px #FFF, 150px 231px #FFF, 1909px 79px #FFF, 1649px 482px #FFF, 1222px 60px #FFF, 915px 918px #FFF, 1556px 786px #FFF, 1406px 1793px #FFF, 1699px 291px #FFF, 1426px 394px #FFF, 1628px 1228px #FFF, 1123px 445px #FFF, 1079px 1072px #FFF, 1835px 1578px #FFF, 466px 433px #FFF, 420px 146px #FFF, 1622px 1267px #FFF, 257px 1469px #FFF, 330px 173px #FFF, 656px 579px #FFF, 738px 180px #FFF, 912px 410px #FFF, 148px 376px #FFF, 1697px 1357px #FFF, 279px 1890px #FFF, 1366px 1813px #FFF, 382px 138px #FFF, 637px 1115px #FFF, 1136px 1988px #FFF, 60px 464px #FFF, 1933px 207px #FFF, 1237px 197px #FFF, 635px 415px #FFF, 411px 1055px #FFF, 211px 1318px #FFF, 538px 519px #FFF, 393px 368px #FFF, 1950px 1863px #FFF, 125px 1659px #FFF, 86px 603px #FFF, 1534px 1069px #FFF, 1773px 1277px #FFF, 203px 1641px #FFF, 1311px 355px #FFF, 42px 1768px #FFF, 703px 1025px #FFF, 400px 845px #FFF, 337px 429px #FFF, 1627px 1756px #FFF, 829px 1238px #FFF, 1030px 129px #FFF, 787px 165px #FFF, 338px 1568px #FFF;
-  }
-  
-  @keyframes animStar {
-    from {
-      transform: translateY(-2000px);
-    }
-  
-    to {
-      transform: translateY(0px);
-    }
   }
   
   .header {
@@ -207,6 +206,10 @@ html {
     filter: drop-shadow(0 0 10px white);
   }
 
+  .scaleImage {
+    animation: scaling-image-animation 4s ease;
+  }
+
   @media screen and (max-width: 40rem) and (min-width: 30rem), (max-height: 40rem) and (min-height: 30rem) {
      h1 {
       font-size: 5rem;
@@ -251,8 +254,5 @@ html {
      }
    }
 
-   .scaleImage {
-    animation: scaling-image-animation 4s ease;
-  }
 
    

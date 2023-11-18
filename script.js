@@ -24,7 +24,36 @@ const textStyle = [
   const easyBtn = document.getElementById('easy-button')
   const normalBtn = document.getElementById('normal-button')
   const hardBtn = document.getElementById('hard-button')
+  const muteBtn = document.getElementById('mute-toggle')
+  const musicTrack = document.getElementById('music-track')
+  const explosionSound = new Audio('ExplosionSound.mp3')
+  const myRange = document.getElementById('my-range')
+  const volume = document.getElementById('volume')
   const battleEl = document.getElementById('space-battle')
+
+  volume.innerHTML = myRange.value
+
+  // Function to change values on volume slider
+  myRange.oninput = function () {
+    volume.innerHTML = this.value
+  }
+
+  // Function for music
+  function setVolume() {
+    musicTrack.volume = myRange.value / 100
+  }
+
+  myRange.addEventListener('change', setVolume)
+
+  // Toggle mute
+  muteBtn.addEventListener('click', ()=>{
+    if (musicTrack.paused) {
+      musicTrack.play()
+      muteBtn.innerHTML = 'Mute'
+    } else {musicTrack.pause()
+      muteBtn.innerHTML = 'Play'
+    }
+  })
 
   // Assign variable name to keep track of how many alien ships have been defeated
   let battlesWon = 0
@@ -89,8 +118,6 @@ const textStyle = [
   ]
 
   // Function to generate alien ships and push them into alienShips array
-  // PAUL NOTE: we could create an easy, normal, and hard version of this function and assign it to a specific button. 
-  // Just have the start button come up after you pick the difficulty
   function generateShipsEasy(num) {
     for (let i = 1; i <= num; i++) {
         const alienShip = new AlienShip(`Alien Ship ${i}`, randomization(6, 3), randomization(4, 2), (randomization(8, 6)) / 10)
@@ -191,8 +218,10 @@ const textStyle = [
       battleEl.textContent = `USS Assembly hull integrity is at ${USSAssembly.hull}`
       // Change alien image to an explosion
       alienImg.src = "https://i.imgur.com/ivuwvOw.png";
+      explosionSound.play()
+      explosionSound.volume = .3
       // Add animation class to alien image to make it look like it's exploding
-      alien.classList.add("scaleImage");
+      alien.classList.add("scaleImage")
     }
 
     // If player ship dies, display taunting message and and display reset button
@@ -202,6 +231,8 @@ const textStyle = [
       battleEl.textContent = `YOU HAD ONE JOB!!!`
       // Change player ship image to an explosion and add animation class
       USS.src="https://i.imgur.com/ivuwvOw.png"
+      explosionSound.play()
+      explosionSound.volume = .3
       USS.classList.add("scaleImage")
     }
     // runs the render function to update gameStatus messages after each round of attacks
@@ -240,6 +271,8 @@ const textStyle = [
     easyBtn.style.display = 'block'
     normalBtn.style.display = 'block'
     hardBtn.style.display = 'block'
+    alienImg.classList.remove("scaleImage")
+    alienImg.src = alienShipsImg[randomization(alienShipsImg.length - 1, 0)]
   })
 
   // Event listener for reset button
